@@ -19,97 +19,138 @@
   </div>
 </header>
 <nav class="menu-navigation">
-    <div class="main-menu d-flex flex-column filter-selectors">
-        <div class="d-flex gap-2 align-items-center justify-content-center mb-2">
-            <button
-                class="menu-button"
-                [class.active]="isAllLinksActive"
-                (click)="showAllLinks()">
-                All
-            </button>
-        </div>
-        <div class="d-flex gap-2 align-items-center justify-content-center flex-wrap">
-            <button
-                *ngFor="let item of mainMenuItems"
-                class="menu-button"
-                [class.active]="activeMenuId === item.MenuID"
-                (click)="showSection(item.MenuID)">
-                {{ item.Description }}
-            </button>
+    <!-- Loading spinner -->
+    <div *ngIf="isLoading" class="loading-spinner">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
     </div>
 
-    <div class="container min-vh-100" *ngIf="displayedItems.length > 0">
-        <div class="row">
-            <div class="col-12">
-                <!-- Headers section -->
-                <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4">
-                  @if(isUtilitiesActive) { Utilities }
-                  @if(activeMenuId === 4) { Hospitality and Liquor }
-                  @if(activeMenuId === 33) { Non Profit }
-                  @if(activeMenuId === 6) { Personal }
-                  @if(activeMenuId === 7) { Professional }
-                  @if(activeMenuId === 9) { Regional Teams }
-                  @if(activeMenuId === 10) { Private Label }
-                  @if(activeMenuId === 181) { Instant Access }
-                  @if(isAllLinksActive) { USLI Main }
-                </h2>
-                <!-- Location-based sections -->
-                <div class="row" *ngIf="!isUtilitiesActive">
-                    <!-- Location 3 -->
-                    <div class="col-md-4">
-                        <div class="submenu-items">
-                            <div *ngFor="let item of displayedItems | locationFilter:3" class="submenu-item">
-                                <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
-                                    {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
-                                </a>
-                                <span *ngIf="!item.CommandLine" class="submenu-text">
-                                    {{ item.Description }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Location 4 -->
-                    <div class="col-md-4">
-                        <div class="submenu-items">
-                            <div *ngFor="let item of displayedItems | locationFilter:4" class="submenu-item">
-                                <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
-                                    {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
-                                </a>
-                                <span *ngIf="!item.CommandLine" class="submenu-text">
-                                    {{ item.Description }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Location 5 -->
-                    <div class="col-md-4">
-                        <div class="submenu-items">
-                            <div *ngFor="let item of displayedItems | locationFilter:5" class="submenu-item">
-                                <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
-                                    {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
-                                </a>
-                                <span *ngIf="!item.CommandLine" class="submenu-text">
-                                    {{ item.Description }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Main content -->
+    <div [class.invisible]="isLoading">
+        <div class="main-menu d-flex flex-column filter-selectors">
+            <!-- <div class="d-flex gap-2 align-items-center justify-content-center mb-2">
+                <button
+                    class="menu-button"
+                    [class.active]="isAllLinksActive"
+                    (click)="showAllLinks()">
+                    All
+                </button>
+            </div> -->
+            <div class="d-flex gap-2 align-items-center justify-content-center flex-wrap">
+                <div *ngFor="let item of mainMenuItems" class="d-flex gap-1 align-items-center">
+                    <button
+                        class="menu-button"
+                        [class.active]="activeMenuId === item.MenuID"
+                        (click)="showSection(item.MenuID)">
+                        {{ item.Description }} <i class="bi" [class.default]="defaultMenuId === item.MenuID" [class.bi-star-fill]="defaultMenuId === item.MenuID" [class.bi-star]="defaultMenuId !== item.MenuID" [class.default-icon] (click)="setDefaultSection(item.MenuID)"></i>
+                    </button>
                 </div>
+            </div>
+        </div>
 
-                <!-- Utilities section -->
-                <div class="submenu-items" *ngIf="isUtilitiesActive">
-                    <div *ngFor="let item of displayedItems" class="submenu-item">
-                      @if(item.MenuID != 156 && item.MenuID != 158 && item.MenuID != 162 && item.MenuID != 193 && item.MenuID != 195) {
-                        <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
-                            {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
-                        </a>
-                        <span *ngIf="!item.CommandLine" class="submenu-text">
-                            {{ item.Description }}
-                        </span>
-                      }
+        <div class="container min-vh-100" *ngIf="displayedItems.length > 0">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Headers section -->
+                    <h2 class="border-bottom border-dark border-4 pb-2 w-100 mb-4">
+                      @if(isUtilitiesActive) { Utilities }
+                      @if(activeMenuId === 4) { Hospitality and Liquor }
+                      @if(activeMenuId === 33) { Non Profit }
+                      @if(activeMenuId === 6) { Personal }
+                      @if(activeMenuId === 7) { Professional }
+                      @if(activeMenuId === 9) { Regional Teams }
+                      @if(activeMenuId === 10) { Private Label }
+                      @if(activeMenuId === 181) { Instant Access }
+                      @if(isAllLinksActive) { USLI Main }
+                    </h2>
+                    <!-- Location-based sections -->
+                    <div class="row" *ngIf="!isUtilitiesActive">
+                        <div class="col-12" *ngIf="isAllLinksActive">
+                            <div *ngFor="let group of displayedItems" class="menu-section mb-4">
+                                <h3 class="section-title mb-3">
+                                    @if(group.MenuID === 4) { Hospitality and Liquor }
+                                    @if(group.MenuID === 33) { Non Profit }
+                                    @if(group.MenuID === 6) { Personal }
+                                    @if(group.MenuID === 7) { Professional }
+                                    @if(group.MenuID === 9) { Regional Teams }
+                                    @if(group.MenuID === 10) { Private Label }
+                                    @if(group.MenuID === 181) { Instant Access }
+                                </h3>
+                                <div class="row">
+                                    <div class="col-md-4" *ngFor="let location of [3,4,5]">
+                                        <div class="submenu-items">
+                                            <div *ngFor="let item of (group.items || []) | locationFilter:location" class="submenu-item">
+                                                <a *ngIf="item.CommandLine" [href]="item.CommandLine"
+                                                   class="submenu-link button d-flex justify-content-between align-items-center">
+                                                    {{ item.Description }}
+                                                    <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+                                                </a>
+                                                <span *ngIf="!item.CommandLine" class="submenu-text">
+                                                    {{ item.Description }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Keep existing location-based sections for non-isAllLinksActive state -->
+                        <ng-container *ngIf="!isAllLinksActive">
+                            <div class="col-md-4">
+                                <div class="submenu-items">
+                                    <div *ngFor="let item of displayedItems | locationFilter:3" class="submenu-item">
+                                        <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center" title="Click here to go to {{ item.Description }}">
+                                            {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+                                        </a>
+                                        <span *ngIf="!item.CommandLine" class="submenu-text">
+                                            {{ item.Description }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="submenu-items">
+                                    <div *ngFor="let item of displayedItems | locationFilter:4" class="submenu-item">
+                                        <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center" title="Click here to go to {{ item.Description }}">
+                                            {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+                                        </a>
+                                        <span *ngIf="!item.CommandLine" class="submenu-text">
+                                            {{ item.Description }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="submenu-items">
+                                    <div *ngFor="let item of displayedItems | locationFilter:5" class="submenu-item">
+                                        <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center" title="Click here to go to {{ item.Description }}">
+                                            {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+                                        </a>
+                                        <span *ngIf="!item.CommandLine" class="submenu-text">
+                                            {{ item.Description }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+
+                    <!-- Utilities section -->
+                    <div class="submenu-items" *ngIf="isUtilitiesActive">
+                        <div *ngFor="let item of displayedItems" class="submenu-item">
+                          @if(item.MenuID != 156 && item.MenuID != 158 && item.MenuID != 162 && item.MenuID != 193 && item.MenuID != 195) {
+                            <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
+                                {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
+                            </a>
+                            <span *ngIf="!item.CommandLine" class="submenu-text">
+                                {{ item.Description }}
+                            </span>
+                          }
+                        </div>
                     </div>
                 </div>
             </div>

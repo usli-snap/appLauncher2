@@ -8,6 +8,7 @@ export interface MenuItem {
     Location: string;
     Description: string;
     CommandLine: string;
+    items?: MenuItem[]; // Add this line to include the items property
 }
 
 export interface MenuResponse {
