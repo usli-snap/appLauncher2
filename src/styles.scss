@@ -1,0 +1,89 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@fontsource/roboto-condensed";
+
+/* reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, q, small, strike, strong, sub, sup, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; font-family: 'Roboto', 'Open Sans', Arial, sans-serif; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+
+html, body { width: 100%; height: 100%; }
+html { background-color: #fff; }
+body { font-size: 95.52%; line-height: 1.6875; color: #222; overflow-x: hidden; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;  }
+h1, h2, h3, h4, h5, h6, li, p { overflow-wrap: break-word; word-wrap: break-word; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Roboto Condensed'; font-weight: 400; text-rendering: optimizelegibility; -webkit-font-smoothing: antialiased; }
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
+h1 { font-size: 3em; line-height: 1em; margin-bottom: .5em; }
+h2 { font-size: 2.25em; line-height: 1.33333333em; margin-bottom: .6666666666666667em; }
+h3 { font-size: 1.5em; line-height: 1.33333333em; margin-bottom: 1em; }
+h4 { font-size: 1.3125em; line-height: 1.142857142857143em; margin-bottom: 1.142857142857143em; }
+h5 { font-size: 1.125em; line-height: 1.333333333333333em; margin-bottom: 0.5em; }
+h6 { font-size: 1em; line-height: 1.5em; margin-bottom: 0.4em; }
+
+.filter-selectors {
+  & button {
+      &.active {
+          color: #2ba8bd;
+      }
+  }
+}
+.filter-selectors {
+  button {
+      text-transform: uppercase;
+      font-family: 'Roboto Condensed';
+      color: #222;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+#header { height: 96px }
+
+@media (min-width: 1024px) {
+  #header #menu li a {
+      padding: 0.75em 1.5em;
+  }
+}
+@media (min-width: 768px) {
+  #header #menu li a {
+      display: inline-block;
+      padding: 0.5em 1em;
+  }
+}
+#header #menu li a {
+  padding: 1em 1em;
+  font-family: 'Roboto Condensed';
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+#footer .bottom { background-color: #002F87; color: #fff; height: 104px; font-size: 1em; text-align: center; border-bottom: 4px solid #FF8300; display: flex; align-items: center;}
+#footer .bottom h3 { margin-top: 0.75em; }
+#footer .sep { background-color: #242829; height: 1px; width: auto; margin-bottom: 0; }
+#footer .icon-float-left { display: none; float: left; font-size: 2em; margin: 0.4em 0.4em 0.2em 0.3em; }
+#footer .bottom .container .grid6:last-child p { margin-bottom: 0; }
+#footer .bottom .right-side .button { padding: 0.75em; font-size: 1.25em; }
+
+@media (min-width: 768px) {
+  #footer .bottom .right-side .button {
+      position: relative;
+      margin-bottom: 0;
+  }
+}
+
+#footer .bottom .right-side .button {
+  padding: 0.75em;
+  font-size: 1.25em;
+}
+.button.light, button.light {
+  cursor: pointer;
+  border-color: #fff;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; -ms-transition: all 0.3s ease; -o-transition: all 0.3s ease; transition: all 0.3s ease;
+  &:hover { background: #fff; color: #005288 }
+}
+
