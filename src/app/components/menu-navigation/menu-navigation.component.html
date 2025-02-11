@@ -10,8 +10,7 @@
           <nav id="menu">
               <ul class="list-unstyled">
                   <li>
-                    <!-- <a href="#" (click)="showUtilities()" aria-label="Click here to go to utilities"><i class="bi bi-gear me-1"></i> Utilities</a> -->
-                    <button class="menu-button utils" [class.active]="isUtilitiesActive" (click)="showUtilities()"><i class="bi bi-gear me-1"></i> Utilities</button>
+                    <button class="menu-button utils" [class.active]="isUtilitiesActive" (click)="showUtilities()" aria-label="Click here to go to Utilities"><i class="bi bi-gear me-1"></i> Utilities</button>
                   </li>
               </ul>
           </nav>
@@ -33,7 +32,8 @@
                 <button
                     class="menu-button"
                     [class.active]="isAllLinksActive"
-                    (click)="showAllLinks()">
+                    (click)="showAllLinks()"
+                    attr.aria-label="Click here to see All">
                     All
                 </button>
             </div> -->
@@ -42,7 +42,8 @@
                     <button
                         class="menu-button"
                         [class.active]="activeMenuId === item.MenuID"
-                        (click)="showSection(item.MenuID)">
+                        (click)="showSection(item.MenuID)"
+                        attr.aria-label="Click here to go to {{ item.Description }}">
                         {{ item.Description }} <i class="bi" [class.default]="defaultMenuId === item.MenuID" [class.bi-star-fill]="defaultMenuId === item.MenuID" [class.bi-star]="defaultMenuId !== item.MenuID" [class.default-icon] (click)="setDefaultSection(item.MenuID)"></i>
                     </button>
                 </div>
@@ -127,7 +128,7 @@
                             <div class="col-md-4">
                                 <div class="submenu-items">
                                     <div *ngFor="let item of displayedItems | locationFilter:5" class="submenu-item">
-                                        <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center" title="Click here to go to {{ item.Description }}">
+                                        <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center" attr.aria-label="Click here to go to {{ item.Description }}">
                                             {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
                                         </a>
                                         <span *ngIf="!item.CommandLine" class="submenu-text">
@@ -143,7 +144,7 @@
                     <div class="submenu-items" *ngIf="isUtilitiesActive">
                         <div *ngFor="let item of displayedItems" class="submenu-item">
                           @if(item.MenuID != 156 && item.MenuID != 158 && item.MenuID != 162 && item.MenuID != 193 && item.MenuID != 195) {
-                            <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center">
+                            <a *ngIf="item.CommandLine" [href]="item.CommandLine" class="submenu-link button d-flex justify-content-between align-items-center" attr.aria-label="Click here to go to {{ item.Description }}">
                                 {{ item.Description }} <i class="bi bi-arrow-right-circle-fill fs-4"></i>
                             </a>
                             <span *ngIf="!item.CommandLine" class="submenu-text">

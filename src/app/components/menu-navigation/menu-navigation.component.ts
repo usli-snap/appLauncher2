@@ -109,9 +109,8 @@ export class MenuNavigationComponent implements OnInit {
     setDefaultSection(menuId: number): void {
         this.preferencesService.setDefaultMenuId(menuId);
         this.defaultMenuId = menuId;
-        // Show feedback to user
         const menuName = this.mainMenuItems.find(item => item.MenuID === menuId)?.Description;
-        alert(`${menuName} has been set as your default section`);
+        alert(`${menuName} has been set as your default preference`);
     }
 
     showUtilities(): void {
@@ -122,9 +121,9 @@ export class MenuNavigationComponent implements OnInit {
       this.menuService.getMenuData().subscribe({
           next: (response) => {
               if (response && response.view) {
-                  console.log('Response data:', response);
+                  //console.log('Response data:', response);
                   this.displayedItems = this.menuService.getUtilitiesItems(response.view);
-                  console.log('Displayed utilities items:', this.displayedItems);
+                  //console.log('Displayed utilities items:', this.displayedItems);
               } else {
                   console.error('Invalid response format:', response);
               }

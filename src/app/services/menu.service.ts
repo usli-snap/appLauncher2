@@ -36,15 +36,15 @@ export class MenuService {
 
     getUtilitiesItems(data: MenuItem[]): MenuItem[] {
         // Log the data for debugging
-        console.log('All menu items:', data);
+        //console.log('All menu items:', data);
 
         const utilitiesItems = data.filter(item => {
-            console.log('Checking item:', item);
+            //console.log('Checking item:', item);
             return item.LocationID === 2;
         });
 
         // Log the filtered items
-        console.log('Utilities items:', utilitiesItems);
+        //console.log('Utilities items:', utilitiesItems);
         return utilitiesItems;
     }
 }
