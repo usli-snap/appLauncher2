@@ -18,11 +18,16 @@ export class MenuNavigationComponent implements OnInit {
     isAllLinksActive = false;
     isUtilitiesActive = false;
 
-    constructor(private menuService: MenuService) {}
+    constructor(private menuService: MenuService) {
+        // Set default activeMenuId to 4 (Hospitality and Liquor)
+        this.activeMenuId = 4;
+    }
 
     ngOnInit(): void {
         this.menuService.getMenuData().subscribe(response => {
             this.mainMenuItems = this.menuService.getMainMenuItems(response.view);
+            // Show the default section on init
+            this.showSection(this.activeMenuId as number);
         });
     }
 
